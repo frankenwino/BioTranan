@@ -1,0 +1,57 @@
+@page "/reservations"
+@rendermode InteractiveServer
+@using BioTranan.Core.Entities
+@using BioTranan.Core.Interfaces
+@inject IFilmService filmService
+@inject IScreeningService screeningService
+@inject IReservationService reservationService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Reservations</PageTitle>
+
+@if (reservations is null)
+{
+        <p>No reservations found</p>
+}
+else
+{
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Film</th>
+                <th>Total Seats</th>
+                <th>Date</th>
+                <th>Reservation Code</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Reservation reservation in reservations)
+            {
+                <tr>
+                    <td>@reservation.Screening.Film.Title</td>
+                    <td>@reservation.Seats</td>
+                    <td>@reservation.Screening.Starts</td>
+                    <td>@reservation.ReservationCode</td>
+                    <td><button class="btn btn-primary" @onclick="@( () => CancelReservation(reservation.Id) )">Cancel</button></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+}
+
+@code {
+    private IEnumerable<Reservation> reservations = new List<Reservation>();
+
+    private async Task CancelReservation(int reservationId)
+    {
+        await reservationService.DeleteReservationByIdAsync(reservationId);
+
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        reservations = await reservationService.GetAllReservationsAsync();
+    }
+}

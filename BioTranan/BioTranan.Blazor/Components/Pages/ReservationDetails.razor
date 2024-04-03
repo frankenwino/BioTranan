@@ -1,0 +1,57 @@
+@page "/reservationdetails/{reservationId:int}"
+@rendermode InteractiveServer
+@using BioTranan.Core.Entities
+@using BioTranan.Core.Interfaces
+@inject IFilmService filmService
+@inject IScreeningService screeningService
+@inject IReservationService reservationService
+
+@if (reservation is null)
+{
+    <p>Reservation not found</p>
+}
+else
+{
+    <PageTitle>Reservation @reservation.ReservationCode</PageTitle>
+    <h1>Reservation for @reservation.Screening.Film.Title</h1>
+
+    <table class="table">
+    <tr>
+        <th><strong>Auditorium:</strong></th>
+        <td>@reservation.Screening.Auditorium.Name</td>
+    </tr>
+    <tr>
+        <th><strong>Date:</strong></th>
+        <td>@reservation.Screening.Starts</td>
+    </tr>
+
+    <tr>
+        <th><strong>Total Seats:</strong></th>
+        <td>@reservation.Seats</td>
+    </tr>
+    <tr>
+        <th><strong>Total Price:</strong></th>
+        <td>@TotalCost() kr</td>
+    </tr>
+    <tr>
+        <th><strong>Reservation Code:</strong></th>
+        <td>@reservation.ReservationCode</td>
+    </tr>
+</table>
+}
+
+@code {
+    private Reservation? reservation { get; set; }
+
+    [Parameter]
+    public int reservationId { get; set; }
+
+    private long TotalCost()
+    {
+        return reservation.Seats * reservation.Screening.TicketPrice;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        reservation = await reservationService.GetByReservationIdAsync(reservationId);
+    }
+}

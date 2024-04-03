@@ -1,0 +1,314 @@
+@Api_HostAddress = http://localhost:5120/api/1
+
+GET {{Api_HostAddress}}/film
+
+###
+GET {{Api_HostAddress}}/film/2
+
+###
+GET {{Api_HostAddress}}/film/tt0075859
+
+###
+POST {{Api_HostAddress}}/film
+Content-Type: application/json
+
+{
+    "title": "Plan 9 from Outer Space",
+    "imdbid": "tt0052077",
+    "runtimeMinutes": 79,
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0052077
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+###
+
+POST {{Api_HostAddress}}/film/tt0075859
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0072271
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0077402
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0092549
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0069897
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0080057
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0079501
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0070672
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0059170
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0063032
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0081506
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0089348
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0076637
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0073756
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0072913
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0065143
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0078243
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0067927
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0070552
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0079912
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0067972
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0089013
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0086610
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0082340
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0215960
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0093091
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0082775
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0080931
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0060315
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0064939
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0086192
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0082307
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0070350
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0098156
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+POST {{Api_HostAddress}}/film/tt0089880
+Content-Type: application/json
+
+{
+    "screeningsAllowed": 5
+}
+
+###
+DELETE {{Api_HostAddress}}/film/36
+
+###
+DELETE {{Api_HostAddress}}/film/tt0098156

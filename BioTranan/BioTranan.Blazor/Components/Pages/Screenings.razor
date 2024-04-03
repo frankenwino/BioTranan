@@ -1,0 +1,50 @@
+@page "/screenings"
+@rendermode InteractiveServer
+@using BioTranan.Core.Entities
+@using BioTranan.Core.Interfaces
+@inject NavigationManager navigationManager
+@inject IFilmService filmService
+@inject IScreeningService screeningService
+
+<PageTitle>Screenings</PageTitle>
+
+<h1>Upcoming Screenings</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Runtime</th>
+            <th>Price</th>
+            <th>Available Seats</th>
+            <th>Auditorium</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Screening screening in screenings)
+        {
+            <tr>
+                <td><img src=@screening.Film.Poster style="height:150px;" /></td>
+                <td><a href="filmdetails/@screening.Film.Id">@screening.Film.Title</a></td>
+                <td>@screening.Starts</td>
+                <td>@screening.Film.RuntimeMinutes mins</td>
+                <td>@screening.TicketPrice kr</td>
+                <td>@screening.AvailableSeats of @screening.TotalSeatsForScreening</td>
+                <td>@screening.Auditorium.Name</td>
+                <td><a href="reserveseats/@screening.Id">Reserve seats</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    public IEnumerable<Screening> screenings { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        screenings = await screeningService.GetAllUpcomingScreeningsAsync();
+    }
+}

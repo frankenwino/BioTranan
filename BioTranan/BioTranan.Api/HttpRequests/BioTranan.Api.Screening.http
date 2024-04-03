@@ -1,0 +1,108 @@
+@Api_HostAddress = http://localhost:5120/api/1
+
+GET {{Api_HostAddress}}/screening
+
+###
+GET {{Api_HostAddress}}/screening/2
+
+###
+
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "4",
+    "auditoriumId": "1",
+    "starts": "2024-04-30T13:30:00",
+    "ticketPrice": "150",
+    "seatRestriction": true
+}
+
+###
+
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "16",
+    "auditoriumId": "2",
+    "starts": "2024-04-25T13:45:00",
+    "ticketPrice": "100",
+    "seatRestriction": false
+}
+
+###
+
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "6",
+    "auditoriumId": "1",
+    "starts": "2024-04-25T15:30:00",
+    "ticketPrice": "175",
+    "seatRestriction": false
+}
+
+###
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "19",
+    "auditoriumId": "1",
+    "starts": "2024-04-25T17:45:00",
+    "ticketPrice": "50",
+    "seatRestriction": true
+}
+
+###
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "21",
+    "auditoriumId": "2",
+    "starts": "2024-04-26T19:00:00",
+    "ticketPrice": "70",
+    "seatRestriction": true
+}
+
+###
+
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "5",
+    "auditoriumId": "2",
+    "starts": "2024-04-27T09:00:00",
+    "ticketPrice": "200",
+    "seatRestriction": false
+}
+
+###
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "22",
+    "auditoriumId": "2",
+    "starts": "2024-04-27T11:00:00",
+    "ticketPrice": "125",
+    "seatRestriction": false
+}
+
+###
+POST {{Api_HostAddress}}/screening
+Content-Type: application/json
+
+{
+    "filmId": "7",
+    "auditoriumId": "1",
+    "starts": "2024-04-27T11:00:00",
+    "ticketPrice": "50",
+    "seatRestriction": false
+}
+
+###

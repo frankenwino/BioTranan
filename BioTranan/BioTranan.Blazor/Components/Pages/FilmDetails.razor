@@ -1,0 +1,97 @@
+@page "/filmdetails/{id:int}"
+@rendermode InteractiveServer
+@using BioTranan.Core.Entities
+@using BioTranan.Core.Interfaces
+@inject IFilmService filmService
+
+@if (film == null)
+{
+    <p>Film not found</p>
+}
+else
+{
+    <PageTitle>@film.Title</PageTitle>
+    <h1>@film.Title</h1>
+    <p>@film.Plot</p>
+    <table class="table">
+    <tr>
+        <th><strong>Director:</strong></th>
+        <td>@film.Director</td>
+    </tr>
+
+    <tr>
+        <th><strong>Writer:</strong></th>
+        <td>@film.Writer</td>
+    </tr>
+    <tr>
+        <th><strong>Rated:</strong></th>
+        <td>@film.Rated</td>
+    </tr>
+    <tr>
+        <th><strong>Language:</strong></th>
+        <td>@film.Language</td>
+    </tr>
+    <tr>
+        <th><strong>Country:</strong></th>
+        <td>@film.Country</td>
+    </tr>
+    <tr>
+        <th><strong>Released:</strong></th>
+        <td>@film.Released</td>
+    </tr>
+    <tr>
+        <th><strong>Cast:</strong></th>
+        <td>@film.Actors</td>
+    </tr>
+    <tr>
+        <th><strong>Runtime:</strong></th>
+        <td>@film.RuntimeMinutes mins</td>
+    </tr>
+    <tr>
+        <th><strong>Genre:</strong></th>
+        <td>@film.Genre</td>
+    </tr>
+    <tr>
+        <th><strong>Awards:</strong></th>
+        <td>@film.Awards</td>
+    </tr>
+    <tr>
+        <th><strong>Box Office:</strong></th>
+        <td>@film.BoxOffice</td>
+    </tr>
+    <tr>
+        <th><strong>Metascore:</strong></th>
+        <td>@film.Metascore</td>
+    </tr>
+    <tr>
+        <th><strong>Imdb Rating:</strong></th>
+        <td>@film.ImdbRating</td>
+    </tr>
+    <tr>
+        <th><strong>Imdb Id:</strong></th>
+        <td>@film.ImdbId</td>
+    </tr>
+    <tr>
+        <th><img src=@film.Poster style="height:350px;" /></th>
+        @if (trailerUrl is not null)
+            {
+                <td><iframe width="560" height="350" src="https://www.youtube.com/embed/@trailerUrl" frameborder="0"
+                        allowfullscreen></iframe></td>
+            }
+        </tr>
+    </table>
+}
+
+@code {
+    private Film? film { get; set; }
+
+    private string trailerUrl { get; set; }
+
+    [Parameter]
+    public int id { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        film = await filmService.GetFilmByIdAsync(id);
+        trailerUrl = await filmService.GetYouTubeTrailerKeyByImdbIdAsync(film.ImdbId);
+    }
+}

@@ -1,0 +1,5 @@
+@Api_HostAddress = http://localhost:5120/api/1
+
+GET {{Api_HostAddress}}/omdb/tt0082307111
+
+###

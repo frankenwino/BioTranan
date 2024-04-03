@@ -1,0 +1,151 @@
+@page "/reserveseats/{screeningId:int}"
+@rendermode InteractiveServer
+@using BioTranan.Core.Entities
+@using BioTranan.Core.Interfaces
+@inject IFilmService filmService
+@inject IScreeningService screeningService
+@inject IReservationService reservationService
+@inject NavigationManager naivgationManager
+
+<PageTitle>Reserve seats</PageTitle>
+
+@if (film is null)
+{
+    <p>Film not found</p>
+}
+else if (screening is null)
+{
+    <p>Screening not found</p>
+}
+else
+{
+    <h1>Reserve seats for @film.Title</h1>
+
+    <table class="table">
+    <tr>
+        <th><strong>Auditorium:</strong></th>
+        <td>@screening.Auditorium.Name</td>
+    </tr>
+    <tr>
+        <th><strong>Date:</strong></th>
+        <td>@screening.Starts</td>
+    </tr>
+    <tr>
+        <th><strong>Seat availability:</strong></th>
+        <td>@screening.AvailableSeats of @screening.TotalSeatsForScreening</td>
+    </tr>
+    <tr>
+        <th><strong>Ticket Price:</strong></th>
+        <td>@screening.TicketPrice kr</td>
+    </tr>
+    <tr>
+        <th><strong>Total Cost:</strong></th>
+        <td>@TotalCost() kr (@seats x @screening.TicketPrice kr)</td>
+    </tr>
+</table>
+
+    <input type="number" min="1" placeholder="Seats" @bind="seats" required />
+
+    <input type="email" minlength="1" placeholder="Email address" @bind="emailAddress" required
+        pattern="[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+
+
+    @if (seats > 0 && seats <= screening.AvailableSeats)
+    {
+        string seatsMessage = "seat";
+
+        if (seats > 1)
+        { seatsMessage = "seats"; }
+
+        <button class="btn btn-primary" @onclick="CreateReservation">Reserve @seats @seatsMessage</button>
+
+        @if (reservationCode != null)
+        {
+            <p>Reservation Code: @reservationCode</p>
+        }
+    }
+    else
+    {
+        if (seats > screening.AvailableSeats)
+        {
+            <button class="btn btn-primary">Only @screening.AvailableSeats seats available</button>
+        }
+        else
+        {
+            <button class="btn btn-primary">@screening.AvailableSeats seats available</button>
+        }
+    }
+}
+
+@code {
+    private Film? film { get; set; }
+
+    private Screening? screening { get; set; }
+    private Reservation? reservation { get; set; }
+    private string reservationCode;
+
+    [System.ComponentModel.DataAnnotations.EmailAddress(ErrorMessage = "Invalid email address")]
+    private string emailAddress;
+
+    private uint seats;
+
+    [Parameter]
+    public int screeningId { get; set; }
+
+    private bool EnoughSeats()
+    {
+        if (screening.AvailableSeats == 0 || screening.AvailableSeats < seats)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private async Task CreateReservation()
+    {
+        @* Reservation reservation = new(); *@
+
+        if (screening.AvailableSeats == 0)
+        {
+            @* sold out *@
+        }
+
+        else if (screening.AvailableSeats < seats)
+        {
+            @* only x seats remainng *@
+        }
+        else if (emailAddress.Length == 0)
+        {
+            @* do soemthing *@
+        }
+
+        else
+        {
+            reservation = new()
+                {
+                    ScreeningId = screeningId,
+                    Seats = seats,
+                    ReservationCode = reservationService.GenerateReservationCode(),
+                    EmailAddress = emailAddress
+                };
+
+            await reservationService.AddReservationAsync(reservation);
+
+            naivgationManager.NavigateTo($"/reservationdetails/{reservation.Id}");
+        }
+    }
+
+    private long TotalCost()
+    {
+        return seats * screening.TicketPrice;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        screening = await screeningService.GetScreeningByIdAsync(screeningId);
+        film = await filmService.GetFilmByIdAsync(screening.FilmId);
+    }
+}

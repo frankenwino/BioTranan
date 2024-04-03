@@ -1,0 +1,39 @@
+@Api_HostAddress = http://localhost:5120/api/1
+
+GET {{Api_HostAddress}}/auditorium
+
+###
+
+GET {{Api_HostAddress}}/auditorium/2
+
+###
+
+POST {{Api_HostAddress}}/auditorium
+Content-Type: application/json
+
+{
+    "name": "The Rialto",
+    "seats": "25"
+}
+###
+
+POST {{Api_HostAddress}}/auditorium
+Content-Type: application/json
+
+{
+    "name": "The Grindhouse",
+    "seats": "30"
+}
+
+###
+
+PUT {{Api_HostAddress}}/auditorium/3
+Content-Type: application/json
+
+{
+    "name": "The Avon",
+    "seats": "45"
+}
+
+###
+DELETE {{Api_HostAddress}}/auditorium/3

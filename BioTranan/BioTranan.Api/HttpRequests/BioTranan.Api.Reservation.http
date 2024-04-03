@@ -1,0 +1,50 @@
+@Api_HostAddress = http://localhost:5120/api/1
+
+GET {{Api_HostAddress}}/reservation
+
+###
+GET {{Api_HostAddress}}/reservation/1
+
+###
+GET {{Api_HostAddress}}/reservation/screening/2
+
+###
+
+POST {{Api_HostAddress}}/reservation
+Content-Type: application/json
+
+{
+    "screeningId": "1",
+    "seats": "2",
+    "emailAddress": "george@email.com" 
+}
+###
+
+POST {{Api_HostAddress}}/reservation
+Content-Type: application/json
+
+{
+    "screeningId": "2",
+    "seats": "4",
+    "emailAddress": "jimmy@email" 
+}
+
+###
+
+POST {{Api_HostAddress}}/reservation
+Content-Type: application/json
+
+{
+    "screeningId": "2",
+    "seats": "3",
+    "emailAddress": "carlos@email" 
+}
+
+###
+DELETE {{Api_HostAddress}}/reservation/4
+
+###
+POST {{Api_HostAddress}}/reservation/checkinreservationcode/6AE415EB
+
+###
+DELETE {{Api_HostAddress}}/reservation/olderthan/1

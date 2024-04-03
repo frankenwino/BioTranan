@@ -1,0 +1,43 @@
+@page "/films"
+@* @page "/filmdetails/{id:int}" *@
+@rendermode InteractiveServer
+@using BioTranan.Core.Entities
+@using BioTranan.Core.Interfaces
+@inject IFilmService filmService
+
+<PageTitle>Films</PageTitle>
+
+<h1>Films</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Genre</th>
+            <th>Director</th>
+            <th>Runtime</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Film film in films)
+        {
+            <tr>
+                <td><a href="filmdetails/@film.Id">@film.Title</a></td>
+                <td>@film.Year</td>
+                <td>@film.Genre</td>
+                <td>@film.Director</td>
+                <td>@film.RuntimeMinutes mins</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    public IEnumerable<Film> films { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        films = await filmService.GetFilmsAsync();
+    }
+}
